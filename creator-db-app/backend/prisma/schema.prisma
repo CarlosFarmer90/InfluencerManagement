@@ -1,0 +1,54 @@
+datasource db {
+  provider = "sqlite"
+  url = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Tier {
+  Nano
+  Micro
+  Mid_Tier
+  Macro
+  Mega
+}
+
+model Entry {
+  id            Int         @id @default(autoincrement())
+  nombre        String
+  tituloCanal   String
+  agencia       String?
+  telefono      String?
+  email         String?
+  direccion     String?
+  notas         String?
+
+  // Multi-select
+  categoria     Category[]
+
+  // Facebook
+  handleFb      String?
+  seguidoresFb  Int?
+  tierFb        Tier?
+
+  // Instagram
+  handleIg      String?
+  seguidoresIg  Int?
+  tierIg        Tier?
+
+  // TikTok
+  handleTt      String?
+  seguidoresTt  Int?
+  tierTt        Tier?
+
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model Category {
+  id      Int      @id @default(autoincrement())
+  name    String   @unique
+  entries Entry[]
+}
