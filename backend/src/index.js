@@ -17,54 +17,44 @@ const upload = multer({
 //Helper function to parse followers from string to number
 function parseFollowers(value) {
 
-  console.log("USING UPDATED PARSEFOLLOWERS");
-
   if (
     value === null ||
     value === undefined ||
     value === "" ||
-    value === NaN
+    Number.isNaN(value)
   ) {
     return null;
   }
-  console.log("This is the first test");
   if (typeof value === "number") {
     return value;
   }
-  console.log("This is the second test");
   let str = String(value)
     .trim()
     .replace(/,/g, "");
 
-  console.log("This is the third test");
   const lower = str.toLowerCase();
 
-  console.log("This is the fourth test");
-
   if (lower.endsWith("k")) {
-    return Math.round(
-      parseFloat(lower.replace("k", "")) * 1000
+    const numberPart = parseFloat(
+      lower.replace("k", "")
     );
-  }
 
-  console.log("This is the fifth test");
+    return Number.isNaN(numberPart)
+      ? null
+      : Math.round(numberPart * 1000);
+  }
 
   if (lower.endsWith("m")) {
-    return Math.round(
-      parseFloat(lower.replace("m", "")) * 1000000
+    const numberPart = parseFloat(
+      lower.replace("m", "")
     );
+
+    return Number.isNaN(numberPart)
+      ? null
+      : Math.round(numberPart * 1000000);
   }
-console.log("This is the sixth test");
+
   const parsed = Number(str);
-
-  console.log(
-    "PARSED:",
-    parsed,
-    "ISNAN:",
-    Number.isNaN(parsed)
-  );
-
-  console.log("This is the final test");
 
   return Number.isNaN(parsed)
     ? null
@@ -433,6 +423,7 @@ app.post(
             parseFollowers(
               row.seguidoresIg
             );
+          console.log("IG RESULT", seguidoresIg);
 
           if (
             row.seguidoresIg &&
@@ -453,7 +444,7 @@ app.post(
             parseFollowers(
               row.seguidoresFb
             );
-
+          console.log("FB RESULT", seguidoresFb);
           if (
             row.seguidoresFb &&
             seguidoresFb == null
@@ -473,7 +464,7 @@ app.post(
             parseFollowers(
               row.seguidoresTt
             );
-
+          console.log("TT RESULT", seguidoresTt);
           if (
             row.seguidoresTt &&
             seguidoresTt == null
