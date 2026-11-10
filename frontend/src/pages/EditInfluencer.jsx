@@ -7,6 +7,11 @@ import InfluencerForm from "../components/InfluencerForm";
 //import SuccessMessage from "../components/SuccessMessage";
 import { parseFollowers } from "../utils/parseFollowers";
 import { normalizeInstagram, normalizeFacebook, normalizeTikTok } from "../utils/normalizeSocialHandle";
+import {
+  getInstagramEditValue,
+  getFacebookEditValue,
+  getTikTokEditValue,
+} from "../utils/socialDisplay";
 
 export default function EditInfluencer() {
     const { id } = useParams();
@@ -55,13 +60,13 @@ export default function EditInfluencer() {
                     categoriaIds:
                         data.categoria?.map((c) => c.id) || [],
 
-                    handleFb: data.handleFb || "",
+                    handleFb: getFacebookEditValue(data.handleFb) || "",
                     seguidoresFb: data.seguidoresFb || "",
 
-                    handleIg: data.handleIg || "",
+                    handleIg: getInstagramEditValue(data.handleIg) || "",
                     seguidoresIg: data.seguidoresIg || "",
 
-                    handleTt: data.handleTt || "",
+                    handleTt: getTikTokEditValue(data.handleTt) || "",
                     seguidoresTt: data.seguidoresTt || "",
                 });
             });

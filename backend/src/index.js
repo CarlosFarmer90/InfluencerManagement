@@ -423,7 +423,7 @@ app.post(
             parseFollowers(
               row.seguidoresIg
             );
-          console.log("IG RESULT", seguidoresIg);
+
 
           if (
             row.seguidoresIg &&
@@ -444,7 +444,7 @@ app.post(
             parseFollowers(
               row.seguidoresFb
             );
-          console.log("FB RESULT", seguidoresFb);
+
           if (
             row.seguidoresFb &&
             seguidoresFb == null
@@ -464,7 +464,7 @@ app.post(
             parseFollowers(
               row.seguidoresTt
             );
-          console.log("TT RESULT", seguidoresTt);
+
           if (
             row.seguidoresTt &&
             seguidoresTt == null

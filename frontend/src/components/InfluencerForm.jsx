@@ -150,7 +150,7 @@ export default function InfluencerForm({
             >
                 <input
                     name="handleIg"
-                    placeholder="Handle Instagram"
+                    placeholder="Usuario o URL completo"
                     value={form.handleIg}
                     onChange={handleChange}
                 />
@@ -186,7 +186,7 @@ export default function InfluencerForm({
             >
                 <input
                     name="handleFb"
-                    placeholder="Handle Facebook"
+                    placeholder="Usuario o URL completo"
                     value={form.handleFb}
                     onChange={handleChange}
                 />
@@ -222,7 +222,7 @@ export default function InfluencerForm({
             >
                 <input
                     name="handleTt"
-                    placeholder="Handle TikTok"
+                    placeholder="Usuario o URL completo"
                     value={form.handleTt}
                     onChange={handleChange}
                 />

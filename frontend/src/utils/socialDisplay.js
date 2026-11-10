@@ -36,3 +36,41 @@ export function getTikTokDisplay(url) {
 
     return `@${match[1]}`;
 }
+export function getInstagramEditValue(url) {
+  if (!url) return "";
+
+  const match =
+    url.match(
+      /instagram\.com\/([^/?#]+)/i
+    );
+
+  return match
+    ? match[1]
+    : url;
+}
+
+export function getFacebookEditValue(url) {
+  if (!url) return "";
+
+  const match =
+    url.match(
+      /facebook\.com\/([^/?#]+)/i
+    );
+
+  return match
+    ? match[1]
+    : url;
+}
+
+export function getTikTokEditValue(url) {
+  if (!url) return "";
+
+  const match =
+    url.match(
+      /tiktok\.com\/@?([^/?#]+)/i
+    );
+
+  return match
+    ? match[1]
+    : url;
+}
