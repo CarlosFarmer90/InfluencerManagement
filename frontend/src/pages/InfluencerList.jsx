@@ -3,9 +3,13 @@ import { Link } from "react-router-dom";
 import { formatFollowers } from "../utils/formatFollowers";
 import {
     primaryButtonStyle,
-    dangerButtonStyle,
     secondaryButtonStyle,
 } from "../styles/buttonStyles";
+import {
+    getInstagramDisplay,
+    getFacebookDisplay,
+    getTikTokDisplay,
+} from "../utils/socialDisplay";
 
 
 export default function InfluencerList() {
@@ -927,7 +931,15 @@ export default function InfluencerList() {
                                         </td>
                                     )}
 
-                                    {visibleColumns.handleIg && (<td>{influencer.handleIg}</td>)}
+                                    {visibleColumns.handleIg && (<td>{influencer.handleIg ? (
+                                        <a href={influencer.handleIg} target="_blank" rel="noopener noreferrer">
+                                            {getInstagramDisplay(
+                                                influencer.handleIg
+                                            )}
+                                        </a>
+                                    ) : (
+                                        "N/A"
+                                    )}</td>)}
                                     {visibleColumns.seguidoresIg && (
                                         <td>
                                             {formatFollowers(
@@ -937,7 +949,15 @@ export default function InfluencerList() {
                                     )}
                                     {visibleColumns.tierIg && (<td>{influencer.tierIg}</td>)}
 
-                                    {visibleColumns.handleFb && (<td>{influencer.handleFb}</td>)}
+                                    {visibleColumns.handleFb && (<td>{influencer.handleFb ? (
+                                        <a href={influencer.handleFb} target="_blank" rel="noopener noreferrer">
+                                            {getFacebookDisplay(
+                                                influencer.handleFb
+                                            )}
+                                        </a>
+                                    ) : (
+                                        "N/A"
+                                    )}</td>)}
                                     {visibleColumns.seguidoresFb && (
                                         <td>
                                             {formatFollowers(
@@ -947,7 +967,15 @@ export default function InfluencerList() {
                                     )}
                                     {visibleColumns.tierFb && (<td>{influencer.tierFb}</td>)}
 
-                                    {visibleColumns.handleTt && (<td>{influencer.handleTt}</td>)}
+                                    {visibleColumns.handleTt && (<td>{influencer.handleTt ? (
+                                        <a href={influencer.handleTt} target="_blank" rel="noopener noreferrer">
+                                            {getTikTokDisplay(
+                                                influencer.handleTt
+                                            )}
+                                        </a>
+                                    ) : (
+                                        "N/A"
+                                    )}</td>)}
                                     {visibleColumns.seguidoresTt && (
                                         <td>
                                             {formatFollowers(

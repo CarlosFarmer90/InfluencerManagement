@@ -12,11 +12,7 @@ import {
     dangerButtonStyle,
 } from "../styles/buttonStyles";
 import SuccessMessage from "../components/SuccessMessage";
-import {
-  getInstagramDisplay,
-  getFacebookDisplay,
-  getTikTokDisplay,
-} from "../utils/socialDisplay";
+import { getInstagramDisplay, getFacebookDisplay, getTikTokDisplay } from "../utils/socialDisplay";
 
 
 export default function InfluencerDetail() {
@@ -172,7 +168,15 @@ export default function InfluencerDetail() {
                 <div style={cardStyle}>
                     <h2>Instagram</h2>
 
-                    <p><strong>Handle:</strong> {influencer.handleIg}</p>
+                    <p><strong>Handle:</strong> {influencer.handleIg ? (
+                        <a href={influencer.handleIg} target="_blank" rel="noopener noreferrer">
+                            {getInstagramDisplay(
+                                influencer.handleIg
+                            )}
+                        </a>
+                    ) : (
+                        "N/A"
+                    )}</p>
                     <p><strong>Seguidores:</strong> {formatFollowers(influencer.seguidoresIg)}</p>
                     <p><strong>Tier:</strong> {influencer.tierIg}</p>
                 </div>
@@ -180,7 +184,15 @@ export default function InfluencerDetail() {
                 <div style={cardStyle}>
                     <h2>Facebook</h2>
 
-                    <p><strong>Handle:</strong> {influencer.handleFb}</p>
+                    <p><strong>Handle:</strong> {influencer.handleFb ? (
+                        <a href={influencer.handleFb} target="_blank" rel="noopener noreferrer">
+                            {getFacebookDisplay(
+                                influencer.handleFb
+                            )}
+                        </a>
+                    ) : (
+                        "N/A"
+                    )}</p>
                     <p><strong>Seguidores:</strong> {formatFollowers(influencer.seguidoresFb)}</p>
                     <p><strong>Tier:</strong> {influencer.tierFb}</p>
                 </div>
@@ -188,7 +200,15 @@ export default function InfluencerDetail() {
                 <div style={cardStyle}>
                     <h2>TikTok</h2>
 
-                    <p><strong>Handle:</strong> {influencer.handleTt}</p>
+                    <p><strong>Handle:</strong> {influencer.handleTt ? (
+                        <a href={influencer.handleTt} target="_blank" rel="noopener noreferrer">
+                            {getTikTokDisplay(
+                                influencer.handleTt
+                            )}
+                        </a>
+                    ) : (
+                        "N/A"
+                    )}</p>
                     <p><strong>Seguidores:</strong> {formatFollowers(influencer.seguidoresTt)}</p>
                     <p><strong>Tier:</strong> {influencer.tierTt}</p>
                 </div>
