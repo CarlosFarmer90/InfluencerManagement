@@ -29,6 +29,8 @@ export default function InfluencerList() {
         tituloCanal: true,
         agencia: true,
 
+        notas: true,
+
         email: true,
         categoria: true,
 
@@ -84,6 +86,8 @@ export default function InfluencerList() {
             influencer.nombre?.toLowerCase().includes(search) ||
             influencer.tituloCanal?.toLowerCase().includes(search) ||
             influencer.agencia?.toLowerCase().includes(search) ||
+            influencer.notas?.toLowerCase().includes(search) ||
+            influencer.email?.toLowerCase().includes(search) ||
             influencer.handleIg?.toLowerCase().includes(search) ||
             influencer.handleFb?.toLowerCase().includes(search) ||
             influencer.handleTt?.toLowerCase().includes(search);
@@ -494,6 +498,8 @@ export default function InfluencerList() {
                                     tituloCanal: "Título Canal",
                                     agencia: "Agencia",
 
+                                    notas: "Notas",
+
                                     email: "Email",
                                     categoria: "Categorías",
 
@@ -713,6 +719,7 @@ export default function InfluencerList() {
                                             : "↕"}
                                 </button>
                             </th>)}
+                            {visibleColumns.notas && (<th style={{ backgroundColor: "#f3f4f6" }}>Notas</th>)}
                             {visibleColumns.email && (<th style={{ backgroundColor: "#f3f4f6" }}>Email</th>)}
                             {visibleColumns.categoria && (<th style={{ backgroundColor: "#f3f4f6" }}>Categorías</th>)}
 
@@ -920,6 +927,19 @@ export default function InfluencerList() {
                                     {visibleColumns.tituloCanal && (<td>{influencer.tituloCanal}</td>)}
 
                                     {visibleColumns.agencia && (<td>{influencer.agencia}</td>)}
+
+                                    {visibleColumns.notas && (
+                                        <td>
+                                            {influencer.notas
+                                                ? influencer.notas.length > 30
+                                                    ? `${influencer.notas.substring(
+                                                        0,
+                                                        30
+                                                    )}...`
+                                                    : influencer.notas
+                                                : ""}
+                                        </td>
+                                    )}
 
                                     {visibleColumns.email && (<td>{influencer.email}</td>)}
 
