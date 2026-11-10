@@ -12,6 +12,11 @@ import {
     dangerButtonStyle,
 } from "../styles/buttonStyles";
 import SuccessMessage from "../components/SuccessMessage";
+import {
+  getInstagramDisplay,
+  getFacebookDisplay,
+  getTikTokDisplay,
+} from "../utils/socialDisplay";
 
 
 export default function InfluencerDetail() {
