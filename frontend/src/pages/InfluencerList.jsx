@@ -941,7 +941,23 @@ export default function InfluencerList() {
                                         </td>
                                     )}
 
-                                    {visibleColumns.email && (<td>{influencer.email}</td>)}
+                                    {visibleColumns.email && (
+                                        <td>
+                                            {influencer.email ? (
+                                                <a
+                                                    href={`mailto:${influencer.email}`}
+                                                    style={{
+                                                        color: "#2563eb",
+                                                        textDecoration: "underline",
+                                                    }}
+                                                >
+                                                    {influencer.email}
+                                                </a>
+                                            ) : (
+                                                ""
+                                            )}
+                                        </td>
+                                    )}
 
                                     {visibleColumns.categoria && (
                                         <td>
