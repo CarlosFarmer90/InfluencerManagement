@@ -1548,6 +1548,159 @@ app.delete('/categories/:id', async (req, res) => {
   }
 });
 
+//GET dashboard route
+app.get("/dashboard", async (req, res) => {
+  try {
+    const influencers =
+      await prisma.entry.findMany({
+        include: {
+          categoria: true,
+        },
+      });
+
+    const totalInfluencers =
+      influencers.length;
+
+    const instagramProfiles =
+      influencers.filter(
+        (i) => i.handleIg
+      ).length;
+
+    const facebookProfiles =
+      influencers.filter(
+        (i) => i.handleFb
+      ).length;
+
+    const tiktokProfiles =
+      influencers.filter(
+        (i) => i.handleTt
+      ).length;
+
+    const influencersWithoutInstagram =
+      influencers.filter(
+        (i) => !i.handleIg
+      ).length;
+
+    const influencersWithoutFacebook =
+      influencers.filter(
+        (i) => !i.handleFb
+      ).length;
+
+    const influencersWithoutTikTok =
+      influencers.filter(
+        (i) => !i.handleTt
+      ).length;
+
+    const totalInstagramFollowers =
+      influencers.reduce(
+        (sum, i) =>
+          sum +
+          (i.seguidoresIg || 0),
+        0
+      );
+
+    const totalFacebookFollowers =
+      influencers.reduce(
+        (sum, i) =>
+          sum +
+          (i.seguidoresFb || 0),
+        0
+      );
+
+    const totalTikTokFollowers =
+      influencers.reduce(
+        (sum, i) =>
+          sum +
+          (i.seguidoresTt || 0),
+        0
+      );
+
+    const influencersWithoutAgency =
+      influencers.filter(
+        (i) =>
+          !i.agencia ||
+          i.agencia === "N/A"
+      ).length;
+
+    const influencersWithoutEmail =
+      influencers.filter(
+        (i) => !i.email
+      ).length;
+
+    const categoryCounts = {};
+
+    influencers.forEach(
+      (influencer) => {
+        influencer.categoria.forEach(
+          (category) => {
+            categoryCounts[
+              category.name
+            ] =
+              (categoryCounts[
+                category.name
+              ] || 0) + 1;
+          }
+        );
+      }
+    );
+
+    const topInfluencers =
+      [...influencers]
+        .sort((a, b) => {
+          const totalA =
+            (a.seguidoresIg || 0) +
+            (a.seguidoresFb || 0) +
+            (a.seguidoresTt || 0);
+
+          const totalB =
+            (b.seguidoresIg || 0) +
+            (b.seguidoresFb || 0) +
+            (b.seguidoresTt || 0);
+
+          return totalB - totalA;
+        })
+        .slice(0, 10)
+        .map((i) => ({
+          id: i.id,
+          nombre: i.nombre,
+          totalFollowers:
+            (i.seguidoresIg || 0) +
+            (i.seguidoresFb || 0) +
+            (i.seguidoresTt || 0),
+        }));
+
+    res.json({
+      totalInfluencers,
+
+      instagramProfiles,
+      facebookProfiles,
+      tiktokProfiles,
+
+      totalInstagramFollowers,
+      totalFacebookFollowers,
+      totalTikTokFollowers,
+
+      influencersWithoutInstagram,
+      influencersWithoutFacebook,
+      influencersWithoutTikTok,
+
+      influencersWithoutAgency,
+      influencersWithoutEmail,
+
+      categoryCounts,
+
+      topInfluencers,
+    });
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      error:
+        "Failed to load dashboard data",
+    });
+  }
+});
+
 
 // Start the server
 const PORT = 4000;
