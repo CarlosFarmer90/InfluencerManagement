@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Dashboard() {
     const [stats, setStats] = useState(null);
@@ -45,21 +46,25 @@ export default function Dashboard() {
                 <DashboardCard
                     title="Total Influencers"
                     value={stats.totalInfluencers}
+                    valueColor="#2563eb"
                 />
 
                 <DashboardCard
                     title="Instagram Profiles"
                     value={stats.instagramProfiles}
+                    valueColor="#2563eb"
                 />
 
                 <DashboardCard
                     title="Facebook Profiles"
                     value={stats.facebookProfiles}
+                    valueColor="#2563eb"
                 />
 
                 <DashboardCard
                     title="TikTok Profiles"
                     value={stats.tiktokProfiles}
+                    valueColor="#2563eb"
                 />
 
                 <DashboardCard
@@ -67,6 +72,7 @@ export default function Dashboard() {
                     value={formatFollowers(
                         stats.totalInstagramFollowers
                     )}
+                    valueColor="#2563eb"
                 />
 
                 <DashboardCard
@@ -74,6 +80,7 @@ export default function Dashboard() {
                     value={formatFollowers(
                         stats.totalFacebookFollowers
                     )}
+                    valueColor="#2563eb"
                 />
 
                 <DashboardCard
@@ -81,7 +88,45 @@ export default function Dashboard() {
                     value={formatFollowers(
                         stats.totalTikTokFollowers
                     )}
+                    valueColor="#2563eb"
                 />
+            </div>
+
+            {/* Quick Actions */}
+            <div
+                style={{
+                    marginTop: "40px",
+                }}
+            >
+                <h2>Quick Actions</h2>
+
+                <div
+                    style={{
+                        display: "flex",
+                        gap: "15px",
+                        flexWrap: "wrap",
+                    }}
+                >
+                    <ActionButton
+                        to="/influencers"
+                        label="Ver Influencers"
+                    />
+
+                    <ActionButton
+                        to="/add"
+                        label="Añadir Influencer"
+                    />
+
+                    <ActionButton
+                        to="/import"
+                        label="Importar Influencers"
+                    />
+
+                    <ActionButton
+                        to="/categories"
+                        label="Categorías"
+                    />
+                </div>
             </div>
 
             {/* Top 10 Influencers by Followers */}
@@ -317,6 +362,7 @@ export default function Dashboard() {
                         value={
                             stats.influencersWithoutAgency
                         }
+                        valueColor="#dc2626"
                     />
 
                     <DashboardCard
@@ -324,6 +370,7 @@ export default function Dashboard() {
                         value={
                             stats.influencersWithoutEmail
                         }
+                        valueColor="#dc2626"
                     />
 
                     <DashboardCard
@@ -331,6 +378,7 @@ export default function Dashboard() {
                         value={
                             stats.influencersWithoutInstagram
                         }
+                        valueColor="#dc2626"
                     />
 
                     <DashboardCard
@@ -338,6 +386,7 @@ export default function Dashboard() {
                         value={
                             stats.influencersWithoutFacebook
                         }
+                        valueColor="#dc2626"
                     />
 
                     <DashboardCard
@@ -345,6 +394,7 @@ export default function Dashboard() {
                         value={
                             stats.influencersWithoutTikTok
                         }
+                        valueColor="#dc2626"
                     />
                 </div>
             </div>
@@ -376,9 +426,11 @@ function formatFollowers(value) {
 }
 
 function DashboardCard({
-    title,
-    value,
+  title,
+  value,
+  valueColor,
 }) {
+
     return (
         <div
             style={{
@@ -402,11 +454,37 @@ function DashboardCard({
                 style={{
                     fontSize: "2rem",
                     fontWeight: "bold",
-                    color: "#2563eb",
+                    color: valueColor,
                 }}
             >
                 {value}
             </div>
         </div>
     );
+}
+
+function ActionButton({
+  to,
+  label,
+}) {
+  return (
+    <Link
+      to={to}
+      style={{
+        textDecoration: "none",
+      }}
+    >
+      <div
+        style={{
+          padding: "15px 20px",
+          borderRadius: "8px",
+          backgroundColor: "#2563eb",
+          color: "white",
+          fontWeight: "600",
+        }}
+      >
+        {label}
+      </div>
+    </Link>
+  );
 }
