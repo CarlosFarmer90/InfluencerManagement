@@ -82,30 +82,130 @@ export default function Dashboard() {
                     )}
                 />
             </div>
+            <div
+                style={{
+                    marginTop: "40px",
+                }}
+            >
+                <h2>
+                    Top 10 Influencers by Followers
+                </h2>
+
+                <div
+                    style={{
+                        border: "1px solid #e5e7eb",
+                        borderRadius: "8px",
+                        padding: "20px",
+                        backgroundColor: "white",
+                        boxShadow:
+                            "0 2px 4px rgba(0,0,0,0.1)",
+                    }}
+                >
+                    <table
+                        style={{
+                            width: "100%",
+                            borderCollapse: "collapse",
+                        }}
+                    >
+                        <thead>
+                            <tr>
+                                <th
+                                    style={{
+                                        textAlign: "left",
+                                        paddingBottom: "10px",
+                                    }}
+                                >
+                                    #
+                                </th>
+
+                                <th
+                                    style={{
+                                        textAlign: "left",
+                                        paddingBottom: "10px",
+                                    }}
+                                >
+                                    Influencer
+                                </th>
+
+                                <th
+                                    style={{
+                                        textAlign: "right",
+                                        paddingBottom: "10px",
+                                    }}
+                                >
+                                    Total Followers
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {stats.topInfluencers.map(
+                                (
+                                    influencer,
+                                    index
+                                ) => (
+                                    <tr
+                                        key={
+                                            influencer.id
+                                        }
+                                    >
+                                        <td
+                                            style={{
+                                                padding:
+                                                    "8px 0",
+                                            }}
+                                        >
+                                            {index + 1}
+                                        </td>
+
+                                        <td>
+                                            {
+                                                influencer.nombre
+                                            }
+                                        </td>
+
+                                        <td
+                                            style={{
+                                                textAlign:
+                                                    "right",
+                                            }}
+                                        >
+                                            {formatFollowers(
+                                                influencer.totalFollowers
+                                            )}
+                                        </td>
+                                    </tr>
+                                )
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
+
     );
 }
 
 function formatFollowers(value) {
-  if (!value) {
-    return "0";
-  }
+    if (!value) {
+        return "0";
+    }
 
-  if (value >= 1000000) {
-    return (
-      (value / 1000000).toFixed(1)
-        .replace(".0", "") + "M"
-    );
-  }
+    if (value >= 1000000) {
+        return (
+            (value / 1000000).toFixed(1)
+                .replace(".0", "") + "M"
+        );
+    }
 
-  if (value >= 1000) {
-    return (
-      (value / 1000).toFixed(1)
-        .replace(".0", "") + "K"
-    );
-  }
+    if (value >= 1000) {
+        return (
+            (value / 1000).toFixed(1)
+                .replace(".0", "") + "K"
+        );
+    }
 
-  return value.toLocaleString();
+    return value.toLocaleString();
 }
 
 function DashboardCard({
