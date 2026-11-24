@@ -41,6 +41,7 @@ export default function Dashboard() {
                     marginTop: "20px",
                 }}
             >
+                {/* General Stats */}
                 <DashboardCard
                     title="Total Influencers"
                     value={stats.totalInfluencers}
@@ -82,6 +83,8 @@ export default function Dashboard() {
                     )}
                 />
             </div>
+
+            {/* Top 10 Influencers by Followers */}
             <div
                 style={{
                     marginTop: "40px",
@@ -105,14 +108,17 @@ export default function Dashboard() {
                         style={{
                             width: "100%",
                             borderCollapse: "collapse",
+                            tableLayout: "fixed",
                         }}
                     >
                         <thead>
                             <tr>
                                 <th
                                     style={{
-                                        textAlign: "left",
-                                        paddingBottom: "10px",
+                                        textAlign: "center",
+                                        padding: "10px",
+                                        width: "10%",
+                                        border: "1px solid black",
                                     }}
                                 >
                                     #
@@ -120,8 +126,10 @@ export default function Dashboard() {
 
                                 <th
                                     style={{
-                                        textAlign: "left",
-                                        paddingBottom: "10px",
+                                        textAlign: "center",
+                                        padding: "10px",
+                                        width: "60%",
+                                        border: "1px solid black",
                                     }}
                                 >
                                     Influencer
@@ -130,7 +138,9 @@ export default function Dashboard() {
                                 <th
                                     style={{
                                         textAlign: "right",
-                                        paddingBottom: "10px",
+                                        padding: "10px",
+                                        width: "30%",
+                                        border: "1px solid black",
                                     }}
                                 >
                                     Total Followers
@@ -151,14 +161,19 @@ export default function Dashboard() {
                                     >
                                         <td
                                             style={{
-                                                padding:
-                                                    "8px 0",
+                                                padding: "10px",
+                                                border: "1px solid #e5e7eb",
                                             }}
                                         >
                                             {index + 1}
                                         </td>
 
-                                        <td>
+                                        <td
+                                            style={{
+                                                padding: "10px",
+                                                border: "1px solid #e5e7eb",
+                                            }}
+                                        >
                                             {
                                                 influencer.nombre
                                             }
@@ -166,8 +181,9 @@ export default function Dashboard() {
 
                                         <td
                                             style={{
-                                                textAlign:
-                                                    "right",
+                                                padding: "10px",
+                                                border: "1px solid #e5e7eb",
+                                                textAlign: "right",
                                             }}
                                         >
                                             {formatFollowers(
@@ -179,6 +195,157 @@ export default function Dashboard() {
                             )}
                         </tbody>
                     </table>
+                </div>
+            </div>
+
+            {/* Influencers by Category */}
+            <div
+                style={{
+                    marginTop: "40px",
+                }}
+            >
+                <h2>
+                    Influencers by Category
+                </h2>
+
+                <div
+                    style={{
+                        border: "1px solid #e5e7eb",
+                        borderRadius: "8px",
+                        padding: "20px",
+                        backgroundColor: "white",
+                        boxShadow:
+                            "0 2px 4px rgba(0,0,0,0.1)",
+                    }}
+                >
+                    <table
+                        style={{
+                            width: "100%",
+                            borderCollapse: "collapse",
+                            tableLayout: "fixed",
+                        }}
+                    >
+                        <thead>
+                            <tr>
+                                <th
+                                    style={{
+                                        textAlign: "left",
+                                        padding: "10px",
+                                        width: "75%",
+                                        border: "1px solid black",
+                                    }}
+                                >
+                                    Categoría
+                                </th>
+
+                                <th
+                                    style={{
+                                        textAlign: "right",
+                                        padding: "10px",
+                                        width: "25%",
+                                        border: "1px solid black",
+                                    }}
+                                >
+                                    Influencers
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {Object.entries(
+                                stats.categoryCounts
+                            )
+                                .sort(
+                                    (a, b) =>
+                                        b[1] - a[1]
+                                )
+                                .map(
+                                    (
+                                        [category, count]
+                                    ) => (
+                                        <tr
+                                            key={category}
+                                        >
+                                            <td
+                                                style={{
+                                                    padding: "10px",
+                                                    textAlign: "left",
+                                                    border: "1px solid #e5e7eb",
+                                                }}
+                                            >
+                                                {category}
+                                            </td>
+
+                                            <td
+                                                style={{
+                                                    padding: "10px",
+                                                    textAlign: "right",
+                                                    border: "1px solid #e5e7eb",
+                                                }}
+                                            >
+                                                {count}
+                                            </td>
+                                        </tr>
+                                    )
+                                )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            {/* Influencers without Social Media Handles */}
+            <div
+                style={{
+                    marginTop: "40px",
+                }}
+            >
+                <h2>
+                    Data Quality
+                </h2>
+
+                <div
+                    style={{
+                        display: "grid",
+                        gridTemplateColumns:
+                            "repeat(auto-fit, minmax(250px, 1fr))",
+                        gap: "20px",
+                        marginTop: "20px",
+                    }}
+                >
+                    <DashboardCard
+                        title="Without Agency"
+                        value={
+                            stats.influencersWithoutAgency
+                        }
+                    />
+
+                    <DashboardCard
+                        title="Without Email"
+                        value={
+                            stats.influencersWithoutEmail
+                        }
+                    />
+
+                    <DashboardCard
+                        title="Without Instagram"
+                        value={
+                            stats.influencersWithoutInstagram
+                        }
+                    />
+
+                    <DashboardCard
+                        title="Without Facebook"
+                        value={
+                            stats.influencersWithoutFacebook
+                        }
+                    />
+
+                    <DashboardCard
+                        title="Without TikTok"
+                        value={
+                            stats.influencersWithoutTikTok
+                        }
+                    />
                 </div>
             </div>
         </div>
