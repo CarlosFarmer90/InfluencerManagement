@@ -1,0 +1,102 @@
+import { useEffect, useState } from "react";
+
+export default function Dashboard() {
+    const [stats, setStats] = useState(null);
+
+    useEffect(() => {
+        const loadDashboard = async () => {
+            const response = await fetch(
+                "http://localhost:4000/dashboard"
+            );
+
+            const data = await response.json();
+
+            setStats(data);
+        };
+
+        loadDashboard();
+    }, []);
+
+    if (!stats) {
+        return <p>Cargando dashboard...</p>;
+    }
+
+    return (
+        <div
+            style={{
+                width: "95%",
+                maxWidth: "1400px",
+                margin: "0 auto",
+                padding: "20px",
+            }}
+        >
+            <h1>Dashboard</h1>
+
+            <div
+                style={{
+                    display: "grid",
+                    gridTemplateColumns:
+                        "repeat(auto-fit, minmax(250px, 1fr))",
+                    gap: "20px",
+                    marginTop: "20px",
+                }}
+            >
+                <DashboardCard
+                    title="Total Influencers"
+                    value={stats.totalInfluencers}
+                />
+
+                <DashboardCard
+                    title="Instagram Profiles"
+                    value={stats.instagramProfiles}
+                />
+
+                <DashboardCard
+                    title="Facebook Profiles"
+                    value={stats.facebookProfiles}
+                />
+
+                <DashboardCard
+                    title="TikTok Profiles"
+                    value={stats.tiktokProfiles}
+                />
+            </div>
+        </div>
+    );
+}
+
+function DashboardCard({
+    title,
+    value,
+}) {
+    return (
+        <div
+            style={{
+                border: "1px solid #e5e7eb",
+                borderRadius: "8px",
+                padding: "20px",
+                boxShadow:
+                    "0 2px 4px rgba(0,0,0,0.1)",
+                backgroundColor: "white",
+            }}
+        >
+            <h3
+                style={{
+                    marginBottom: "10px",
+                }}
+            >
+                {title}
+            </h3>
+
+            <div
+                style={{
+                    fontSize: "2rem",
+                    fontWeight: "bold",
+                    color: "#2563eb",
+                }}
+            >
+                {value}
+            </div>
+        </div>
+    );
+}

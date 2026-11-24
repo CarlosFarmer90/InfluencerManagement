@@ -5,6 +5,7 @@ import InfluencerDetail from "./pages/InfluencerDetail";
 import EditInfluencer from "./pages/EditInfluencer";
 import ImportInfluencers from "./pages/ImportInfluencers";
 import Categories from "./pages/Categories";
+import Dashboard from "./pages/Dashboard";
 
 export default function App() {
   return (
@@ -17,7 +18,13 @@ export default function App() {
           gap: "20px",
         }}
       >
-        <Link to="/add">Añadir Influencer</Link>
+        <Link to="/">
+          Dashboard
+        </Link>
+
+        <Link to="/add">
+          Añadir Influencer
+        </Link>
 
         <Link to="/influencers">
           Lista de Influencers
@@ -26,6 +33,7 @@ export default function App() {
         <Link to="/import">
           Carga de Influencers
         </Link>
+
         <Link to="/categories">
           Categorías
         </Link>
@@ -34,18 +42,13 @@ export default function App() {
 
 
       <Routes>
+        <Route path="/" element={<Dashboard />} />
         <Route path="/add" element={<AddInfluencer />} />
         <Route path="/influencers" element={<InfluencerList />} />
         <Route path="/influencers/:id" element={<InfluencerDetail />} />
         <Route path="/influencers/edit/:id" element={<EditInfluencer />} />
-        <Route
-          path="/import"
-          element={<ImportInfluencers />}
-        />
-        <Route
-          path="/categories"
-          element={<Categories />}
-        />
+        <Route path="/import" element={<ImportInfluencers />} />
+        <Route path="/categories" element={<Categories />} />
       </Routes>
     </div>
   );
