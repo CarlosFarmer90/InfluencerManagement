@@ -90,6 +90,8 @@ export default function AddInfluencer() {
       handleTt: normalizeTikTok(
         form.handleTt
       ),
+
+      agencia: form.agencia?.trim() || "N/A",
     };
 
     const response = await fetch("http://localhost:4000/entries", {

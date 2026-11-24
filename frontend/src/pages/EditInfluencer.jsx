@@ -100,6 +100,8 @@ export default function EditInfluencer() {
             handleTt: normalizeTikTok(
                 form.handleTt
             ),
+
+            agencia: form.agencia?.trim() || "N/A",
         };
 
 

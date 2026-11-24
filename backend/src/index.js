@@ -748,7 +748,7 @@ app.post(
                 toStringValue(row.tituloCanal),
 
               agencia:
-                toStringValue(row.agencia),
+                toStringValue(row.agencia) || "N/A",
 
               telefono:
                 toStringValue(row.telefono),
